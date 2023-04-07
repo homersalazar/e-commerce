@@ -1,0 +1,45 @@
+/* .card {
+    border-radius: 10px;
+}
+
+.card-header {
+border-radius: 10px 10px 0 0;
+}
+
+.form-group label {
+font-weight: bold;
+}
+
+.btn-primary {
+background-color: #007bff;
+border-color: #007bff;
+}
+
+.btn-primary:hover {
+background-color: #0069d9;
+border-color: #0062cc;
+}
+
+@media (max-width: 575px) {
+    .card-body {
+        padding: 10px;
+    }
+} */
+
+
+.media-section img{
+    float: left;
+    width:  160px;
+    height: 160px;
+    background-size: cover;
+    padding: 10px;
+    margin: 10px;
+    border: rgb(30 58 138) 2px solid;
+    cursor: pointer;
+    transition: transform .2s;
+
+}
+
+.media-section img:hover{
+transform: scale(1.1);
+}
