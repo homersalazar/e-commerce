@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Media;
 use App\Models\category;
+use App\Models\Product;
 use App\Models\TempData;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,8 @@ class ProductController extends Controller
     public function index()
     {
         $product = DB::table('products')
-        // ->leftJoin('albums', 'products.album_id', '=', 'albums.id')
+        ->leftJoin('media', 'media.id', '=', DB::raw('TRIM(BOTH "," FROM products.media_id)'))
+        ->select('products.*', 'media.*')
         ->get();
         return view('products.index',[
             'product'=>$product
@@ -61,7 +63,28 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'product_name' => 'required',
+            'product_price' => 'required',
+            'product_qty' => 'required'
+        ]);
+
+        $product = new Product();
+        $product->product_name = $request->product_name;
+        $product->descript = $request->product_desc;
+        $product->url_slug = $request->product_url;
+        $product->product_price = $request->product_price;
+        $product->rrp = $request->product_rrp;
+        $product->product_quantity = $request->product_qty;
+        $product->category_id = $request->product_ctgy;
+        $product->product_weight = $request->product_weight;
+        $product->stats = $request->product_stats;
+        $product->media_id = $request->media_id;
+        $product->save();
+        TempData::truncate();
+        return redirect()
+        ->route('product.index')
+        ->with('success',''.ucwords($request->product_name).' has been created successfully.');
     }
 
     /**

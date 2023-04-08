@@ -73,7 +73,7 @@
                                         <input type="dates" name="media_dates" id="media_dates" class="form-control" readonly>
                                         <input type="hidden" name="media_id" id="media_id" class="form-control" readonly>
                                         <input type="hidden" name="media_path" id="media_path" class="form-control" readonly>
-                                        <input type="text" id="select_ids" name="select_ids" value="">
+                                        <input type="hidden" id="select_ids" name="select_ids" value="">
                                     </div>
                                 </div>
                             </div>

@@ -27,6 +27,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
                     <form action="{{ route('product.store') }}" method="post" id="storeProduct">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-5 mt-2">
                                 <label for=""><span class="text-danger">*</span> Name</label>
@@ -42,7 +43,7 @@
                         <div class="row">
                             <div class="col-lg-5 mt-3">
                                 <label for="">URL Slug</label>
-                                <input type="text" name="product_url" id="" class="form-control form-control-sm shadow-none mt-1"  placeholder="your-product-name">
+                                <input type="text" name="product_url" id="product_url" class="form-control form-control-sm shadow-none mt-1"  placeholder="your-product-name">
                             </div>
                         </div>
                         <div class="row">
@@ -109,16 +110,15 @@
                                                 <button type="submit"><i class="text-danger ps-5 fa-lg fa-solid fa-circle-xmark"></i></button>
                                             </form>
                                         </td>
-                                        <input type="hidden" name="media_id" id="media_id" form="storeProduct" value="{{ $item->id }}">
                                     </tr>
                                 @endforeach
+                                <input type="hidden" name="media_id" id="media_id" form="storeProduct" value="{{ implode(',', $media->pluck('id')->toArray()) }}">
                             </tbody>
                         </table>
                     @else
                         <p>No data found.</p>
                     @endif
-                    <button type="button" class="btn shadow-none text-white bg-blue-600 btn-sm" data-bs-toggle="modal" data-bs-target="#add_media">Add Media</button>
-
+                    <button type="button" class="btn shadow-none text-white bg-blue-600 btn-sm mt-4" data-bs-toggle="modal" data-bs-target="#add_media">Add Media</button>
                 </div>
                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
             </div>
