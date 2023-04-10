@@ -19,13 +19,22 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = DB::table('products')
-        ->leftJoin('media', 'media.id', '=', DB::raw('TRIM(BOTH "," FROM products.media_id)'))
-        ->select('products.*', 'media.*')
-        ->get();
-        return view('products.index',[
-            'product'=>$product
-        ]);
+        $products = Product::get();
+        $product = Product::first();
+        if (!is_null($product)) {
+            $mediaIds = explode(',', $product->media_id);
+            $media = Media::whereIn('id', $mediaIds)->get();
+            if ($media->isEmpty()) {
+                $media = null;
+            }
+        } else {
+            $media = null;
+        }
+
+        return view('products.index', compact('product', 'media', 'products'));
+        // return view('products.index',[
+        //     'product'=>$product
+        // ]);
     }
 
     /**

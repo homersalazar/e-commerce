@@ -112,7 +112,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                <input type="hidden" name="media_id" id="media_id" form="storeProduct" value="{{ implode(',', $media->pluck('id')->toArray()) }}">
+                                {{-- <input type="text" name="media_id" id="media_id" form="storeProduct" value="{{ implode(',', $media->pluck('id')->toArray()) }}"> --}}
                             </tbody>
                         </table>
                     @else

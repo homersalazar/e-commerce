@@ -28,17 +28,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($product as $products)
+                        @foreach ($products as $product)
                             <tr>
-                                <td class="max-sm:hidden">{{ $products->id }}</td>
-                                <td class="max-sm:text-xs">{{ ucwords($products->product_name) }}</td>
-                                <td class="max-sm:text-xs">&#8369;{{ number_format($products->product_price) }}</td>
-                                <td class="max-sm:text-xs">{{ ($products->product_quantity == '' || $products->product_quantity == 0) ? '--' : $products->product_quantity . ' ' . ($products->product_quantity == 1 ? 'Piece' : 'Pieces'); }}</td>
-                                {{-- <img src="/storage/images/{{ $products->path }}" width="50" height="50"> --}}
-
-                                <td class="max-sm:hidden"><img src="/storage/images/{{ $products->path }}" width="50" height="50"></td>
-                                <td class="max-sm:hidden">{{ (new DateTime($products->created_at))->format('F j, Y'); }}</td>
-                                <td class="max-sm:hidden">{{ $products->stats == 0 ? "Enabled" : "Disabled"; }}</td>
+                                <td class="max-sm:hidden">{{  $product->id }}</td>
+                                <td class="max-sm:text-xs w-20">{{ ucwords($product->product_name) }}</td>
+                                <td class="max-sm:text-xs">&#8369;{{ number_format($product->product_price) }}</td>
+                                <td class="max-sm:text-xs">{{ ($product->product_quantity == '' || $product->product_quantity == 0) ? '--' : $product->product_quantity . ' ' . ($product->product_quantity == 1 ? 'Piece' : 'Pieces'); }}</td>
+                                <td class="max-sm:hidden p-0">
+                                    <div class="images-wrapper">
+                                        @foreach ($media as $m)
+                                            <img class="product-image" src="/storage/images/{{ $m->path }}">
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td class="max-sm:hidden">{{ (new DateTime($product->created_at))->format('F j, Y'); }}</td>
+                                <td class="max-sm:hidden">{{ $product->stats == 0 ? "Enabled" : "Disabled"; }}</td>
                                 <td class="max-sm:text-xs"><a href="" class="fa-solid fa-pen-to-square"></a></td>
                             </tr>
                         @endforeach
@@ -47,7 +51,7 @@
             </div>
         </div>
     </div>
-    <script>
+    {{-- <script>
         $(function() {
             $('.category-table').DataTable( {
                 "paging":   false,
@@ -55,5 +59,5 @@
                 "info":     false
             } );
         } );
-    </script>
+    </script> --}}
 @endsection

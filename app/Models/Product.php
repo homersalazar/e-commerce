@@ -20,4 +20,8 @@ class Product extends Model
         'product_weight',
         'stats'
     ];
+    // public function media()
+    // {
+    //     return $this->belongsTo(Media::class, 'media_id', 'id');
+    // }
 }
