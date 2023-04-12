@@ -33,6 +33,7 @@ Route::resource('/dashboard', DashboardController::class);
 Route::resource('/category', CategoryController::class);
 
 Route::resource('/product', ProductController::class);
+Route::post('/product-media', [ProductController::class, 'add_image'])->name('products.edit');
 Route::resource('/temp', TempDataController::class);
 
 Route::resource('/media', MediaController::class);

@@ -43,7 +43,7 @@
                                 </td>
                                 <td class="max-sm:hidden">{{ (new DateTime($product->created_at))->format('F j, Y'); }}</td>
                                 <td class="max-sm:hidden">{{ $product->stats == 0 ? "Enabled" : "Disabled"; }}</td>
-                                <td class="max-sm:text-xs"><a href="" class="fa-solid fa-pen-to-square"></a></td>
+                                <td class="max-sm:text-xs"><a href="{{ route('product.edit', $product->id) }}" class="fa-solid fa-pen-to-square"></a></td>
                             </tr>
                         @endforeach
                     </tbody>

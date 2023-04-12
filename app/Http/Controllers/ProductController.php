@@ -31,10 +31,12 @@ class ProductController extends Controller
             $media = null;
         }
 
-        return view('products.index', compact('product', 'media', 'products'));
-        // return view('products.index',[
-        //     'product'=>$product
-        // ]);
+        // return view('products.index', compact('product', 'media', 'products'));
+        return view('products.index',[
+            'product'=>$product,
+            'media'=>$media,
+            'products'=>$products
+        ]);
     }
 
     /**
@@ -96,6 +98,28 @@ class ProductController extends Controller
         ->with('success',''.ucwords($request->product_name).' has been created successfully.');
     }
 
+    public function add_image(Request $request)
+    {
+        $this->validate($request,[
+            'select_ids' => 'required'
+        ]);
+
+        $data = Product::first();
+
+        if ($data) {
+            $mediaIds = explode(',', $data->media_id);
+            $newMediaIds = explode(',', $request->select_ids);
+            $mergedIds = array_merge($mediaIds, $newMediaIds);
+            $uniqueIds = array_unique($mergedIds);
+            $data->media_id = implode(',', $uniqueIds);
+            $data->save();
+        } else {
+            $data = new Product();
+            $data->media_id = $request->select_ids;
+            $data->save();
+        }
+        return redirect()->back();
+    }
     /**
      * Display the specified resource.
      *
@@ -115,7 +139,21 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $images = Media::get();
+        $ctgy = category::get();
+        $row = Product::find($id);
+        if (!is_null($row)) {
+            $mediaIds = explode(',', $row->media_id);
+            $media = Media::whereIn('id', $mediaIds)->get();
+        } else {
+            $media = [];
+        }
+        return view('products.edit',[
+            'images' => $images,
+            'row' => $row,
+            'ctgy' => $ctgy,
+            'media' => $media
+        ]);
     }
 
     /**
@@ -127,8 +165,27 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $this->validate($request,[
+            'product_name' => 'required',
+            'product_price' => 'required',
+            'product_qty' => 'required'
+        ]);
+
+        $product = Product::find($id);
+        $product->product_name = $request->product_name;
+        $product->descript = $request->product_desc;
+        $product->url_slug = $request->product_url;
+        $product->product_price = $request->product_price;
+        $product->rrp = $request->product_rrp;
+        $product->product_quantity = $request->product_qty;
+        $product->category_id = $request->product_ctgy;
+        $product->product_weight = $request->product_weight;
+        $product->stats = $request->product_stats;
+        $product->media_id = $request->media_id;
+        $product->save();
+        return redirect()
+        ->route('product.index')
+        ->with('success',''.ucwords($request->product_name).' has been created successfully.');    }
 
     /**
      * Remove the specified resource from storage.
@@ -138,6 +195,17 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::first();
+        if (!is_null($product)) {
+            $mediaIds = explode(',', $product->media_id);
+            $index = array_search($id, $mediaIds);
+            if ($index !== false) {
+                unset($mediaIds[$index]);
+                $product->media_id = implode(',', $mediaIds);
+                $product->save();
+            }
+        }
+        return redirect()->back();
+
     }
 }

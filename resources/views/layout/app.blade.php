@@ -34,6 +34,7 @@
                 height: 5%;
                 padding: 4px 0px 4px 0px;
             }
+
         </style>
         <div class="container-fluid">
             <div class="row flex-nowrap">
@@ -107,7 +108,7 @@
                         {{ session()->get('success') }}
                     </div><br />
                 @endif
-                <div class="col py-3">
+                <div class="col content py-3">
                     @yield('content')
                 </div>
             </div>
