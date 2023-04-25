@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TempDataController;
@@ -35,6 +36,8 @@ Route::resource('/category', CategoryController::class);
 Route::resource('/product', ProductController::class);
 Route::post('/product-media', [ProductController::class, 'add_image'])->name('products.edit');
 Route::resource('/temp', TempDataController::class);
+
+Route::resource('/discount', DiscountController::class);
 
 Route::resource('/media', MediaController::class);
 

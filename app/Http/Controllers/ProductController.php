@@ -7,7 +7,6 @@ use App\Models\Media;
 use App\Models\category;
 use App\Models\Product;
 use App\Models\TempData;
-use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller

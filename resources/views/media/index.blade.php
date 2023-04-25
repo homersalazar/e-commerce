@@ -42,7 +42,7 @@
             document.getElementById("captions").value = media_caption;
             document.getElementById("dates").value = dates;
             const img = document.querySelector("#image");
-            img.src = "/storage/images/"+media_path;
+            img.src = `/storage/images/${media_path}`;
             img.width = 160;
             img.height = 160;
             $('#update_form').attr('action','/media/'+media_id);

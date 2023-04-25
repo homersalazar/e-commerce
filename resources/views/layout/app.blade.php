@@ -70,7 +70,7 @@
                                     <i class="fa-solid fa-truck-fast fa-lg text-white"></i> <span class="ms-1 d-none text-white d-sm-inline">Shipping</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0 align-middle">
+                                <a href="{{ route('discount.index') }}" class="nav-link px-0 align-middle">
                                     <i class="fa-solid fa-tag fa-lg text-white"></i> <span class="ms-1 d-none text-white d-sm-inline">Discount</span></a>
                             </li>
                             <li>

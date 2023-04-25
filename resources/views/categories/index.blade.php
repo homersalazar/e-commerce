@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-lg-5 mt-4">
-                <a href="{{ route('category.create') }}" class="btn shadow-none text-white bg-blue-600">Create Category</a>
+                <a href="{{ route('category.create') }}" class="btn btn-sm shadow-none text-white bg-blue-600">Create Category</a>
             </div>
         </div>
         <div class="row">
